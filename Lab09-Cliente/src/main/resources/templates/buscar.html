@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Producto - Cliente API REST</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1> Buscar Producto por ID</h1>
+            </div>
+            
+            <nav class="nav">
+                <a th:href="@{/}"> Inicio</a>
+                <a th:href="@{/productos}"> Ver Todos los Productos</a>
+            </nav>
+            
+            <!-- Mensajes de éxito, advertencia o error -->
+            <div th:if="${mensaje}" 
+                 th:class="'alert alert-' + ${tipoMensaje}"
+                 th:text="${mensaje}">
+            </div>
+            
+            <!-- Formulario de búsqueda -->
+            <form th:action="@{/buscar}" method="get">
+                <div class="form-group">
+                    <label for="productId">ID del Producto:</label>
+                    <input type="number" 
+                           id="productId" 
+                           name="id" 
+                           placeholder="Ingrese el ID del producto"
+                           required
+                           min="1">
+                </div>
+                <button type="submit"> Buscar Producto</button>
+            </form>
+            
+            <!-- Detalles del producto encontrado -->
+            <div th:if="${producto != null}" class="product-details">
+                <h3> Producto Encontrado</h3>
+                
+                <div class="detail-row">
+                    <span class="detail-label">ID:</span>
+                    <span class="detail-value" th:text="${producto.productId}">1</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Nombre:</span>
+                    <span class="detail-value" th:text="${producto.productName}">Producto</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Precio:</span>
+                    <span class="detail-value">
+                        <span class="price-badge" th:text="'$' + ${producto.price}">$0.00</span>
+                    </span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Unidad:</span>
+                    <span class="detail-value" th:text="${producto.unit}">N/A</span>
+                </div>
+                
+                <div th:if="${producto.category != null}">
+                    <h4 style="color: #667eea; margin-top: 20px; margin-bottom: 10px;">Categoría</h4>
+                    
+                    <div class="detail-row">
+                        <span class="detail-label">ID Categoría:</span>
+                        <span class="detail-value" th:text="${producto.category.categoryId}">1</span>
+                    </div>
+                    
+                    <div class="detail-row">
+                        <span class="detail-label">Nombre Categoría:</span>
+                        <span class="detail-value" th:text="${producto.category.categoryName}">Categoría</span>
+                    </div>
+                    
+                    <div class="detail-row">
+                        <span class="detail-label">Descripción:</span>
+                        <span class="detail-value" th:text="${producto.category.description}">Descripción</span>
+                    </div>
+                </div>
+                
+                <div th:if="${producto.supplier != null}">
+                    <h4 style="color: #667eea; margin-top: 20px; margin-bottom: 10px;">Proveedor</h4>
+                    
+                    <div class="detail-row">
+                        <span class="detail-label">ID Proveedor:</span>
+                        <span class="detail-value" th:text="${producto.supplier.supplierId}">1</span>
+                    </div>
+                    
+                    <div class="detail-row">
+                        <span class="detail-label">Nombre:</span>
+                        <span class="detail-value" th:text="${producto.supplier.supplierName}">Proveedor</span>
+                    </div>
+                    
+                    <div class="detail-row">
+                        <span class="detail-label">Contacto:</span>
+                        <span class="detail-value" th:text="${producto.supplier.contactName}">N/A</span>
+                    </div>
+                    
+                    <div class="detail-row">
+                        <span class="detail-label">Dirección:</span>
+                        <span class="detail-value" th:text="${producto.supplier.address}">N/A</span>
+                    </div>
+                    
+                    <div class="detail-row">
+                        <span class="detail-label">Ciudad:</span>
+                        <span class="detail-value" th:text="${producto.supplier.city}">N/A</span>
+                    </div>
+                    
+                    <div class="detail-row">
+                        <span class="detail-label">País:</span>
+                        <span class="detail-value" th:text="${producto.supplier.country}">N/A</span>
+                    </div>
+                    
+                    <div class="detail-row">
+                        <span class="detail-label">Teléfono:</span>
+                        <span class="detail-value" th:text="${producto.supplier.phone}">N/A</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3 style="color: #667eea;">ℹ Información Técnica</h3>
+            <div class="product-details">
+                <div class="detail-row">
+                    <span class="detail-label">Endpoint consumido:</span>
+                    <span class="detail-value">GET http://localhost:8080/api/product/{id}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Autenticación:</span>
+                    <span class="detail-value">HTTP Basic Authentication (admin/pass123)</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Método HTTP:</span>
+                    <span class="detail-value">GET</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Códigos HTTP manejados:</span>
+                    <span class="detail-value">200 OK, 404 Not Found, 401 Unauthorized</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Formato respuesta:</span>
+                    <span class="detail-value">JSON (Objeto producto único)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

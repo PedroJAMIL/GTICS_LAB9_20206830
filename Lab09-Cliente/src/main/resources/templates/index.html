@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente API REST - Lab09</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>Cliente API REST - Laboratorio 09</h1>
+            </div>
+            
+            <div class="welcome-text">
+                <h2>Bienvenido al Cliente de la API de Productos</h2>
+            </div>
+            
+            <nav class="nav">
+                <a th:href="@{/productos}"> Ver Todos los Productos</a>
+                <a th:href="@{/buscar}"> Buscar Producto por ID</a>
+            </nav>
+            
+            <div class="product-details">
+                <h3>Información del Proyecto</h3>
+                <div class="detail-row">
+                    <span class="detail-label">Puerto Cliente:</span>
+                    <span class="detail-value">8081</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Puerto API:</span>
+                    <span class="detail-value">8080</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">API Base URL:</span>
+                    <span class="detail-value">http://localhost:8080/api/product</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

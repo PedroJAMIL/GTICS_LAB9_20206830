@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos - Cliente API REST</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1> Lista de Productos</h1>
+            </div>
+            
+            <nav class="nav">
+                <a th:href="@{/}"> Inicio</a>
+                <a th:href="@{/buscar}"> Buscar Producto</a>
+                <a th:href="@{/productos}">Recargar Lista</a>
+            </nav>
+            
+            <div th:if="${mensaje}"
+                 th:class="'alert alert-' + ${tipoMensaje}"
+                 th:text="${mensaje}">
+            </div>
+            
+            <div class="table-container">
+                <table th:if="${productos != null and !productos.isEmpty()}">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre del Producto</th>
+                            <th>Categoría</th>
+                            <th>Proveedor</th>
+                            <th>Unidad</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="producto : ${productos}">
+                            <td th:text="${producto.productId}">1</td>
+                            <td th:text="${producto.productName}">Producto</td>
+                            <td th:text="${producto.category != null ? producto.category.categoryName : 'N/A'}">Categoría</td>
+                            <td th:text="${producto.supplier != null ? producto.supplier.supplierName : 'N/A'}">Proveedor</td>
+                            <td th:text="${producto.unit}">Unidad</td>
+                            <td>
+                                <span class="price-badge" th:text="'$' + ${producto.price}">$0.00</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div th:if="${productos == null or productos.isEmpty()}" 
+                     style="text-align: center; padding: 40px; color: #666;">
+                    <p style="font-size: 1.2em;">No hay productos disponibles.</p>
+                    <p>Verifica que el servidor API esté ejecutándose en el puerto 8080.</p>
+                </div>
+            </div>
+            
+            <div th:if="${productos != null and !productos.isEmpty()}"
+                 style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; text-align: center;">
+                <strong>Total de productos:</strong> <span th:text="${productos.size()}">0</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

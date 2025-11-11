@@ -1,0 +1,7 @@
+com\example\cliente\dto\ProductDTO.class
+com\example\cliente\ClienteApplication.class
+com\example\cliente\dto\CategoryDTO.class
+com\example\cliente\service\ProductApiService.class
+com\example\cliente\controller\ProductClientController.class
+com\example\cliente\dto\SupplierDTO.class
+com\example\cliente\service\ProductApiService$1.class
