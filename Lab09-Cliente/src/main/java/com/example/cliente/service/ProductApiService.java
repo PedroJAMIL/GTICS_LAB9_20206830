@@ -17,11 +17,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Ejercicio 4.1: Configuración del Cliente (2 puntos)
- * - Implementa la lógica necesaria para consumir servicios web protegidos
- * - Configura la autenticación requerida para acceder al API
- */
 @Service
 public class ProductApiService {
 
@@ -36,9 +31,7 @@ public class ProductApiService {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    /**
-     * Crea un cliente HTTP con autenticación básica configurada
-     */
+  
     private CloseableHttpClient createAuthenticatedClient() {
         BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(
@@ -51,10 +44,6 @@ public class ProductApiService {
             .build();
     }
 
-    /**
-     * Ejercicio 4.2: Listar Productos Autenticado (2 puntos)
-     * Obtiene todos los productos del API protegido
-     */
     public List<ProductDTO> getAllProducts() {
         try (CloseableHttpClient httpClient = createAuthenticatedClient()) {
             HttpGet request = new HttpGet(apiBaseUrl);
@@ -78,10 +67,7 @@ public class ProductApiService {
         }
     }
 
-    /**
-     * Ejercicio 4.3: Buscar un Producto Autenticado (2 puntos)
-     * Obtiene un producto específico por ID del API protegido
-     */
+
     public ProductDTO getProductById(Integer id) {
         try (CloseableHttpClient httpClient = createAuthenticatedClient()) {
             HttpGet request = new HttpGet(apiBaseUrl + "/" + id);
