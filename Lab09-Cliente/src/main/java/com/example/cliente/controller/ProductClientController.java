@@ -15,19 +15,11 @@ public class ProductClientController {
 
     @Autowired
     private ProductApiService productApiService;
-
-    /**
-     * Página de inicio
-     */
     @GetMapping("/")
     public String home() {
         return "index";
     }
 
-    /**
-     * Ejercicio 4.2: Listar Productos Autenticado (2 puntos)
-     * Muestra una tabla con todos los productos obtenidos del API protegido
-     */
     @GetMapping("/productos")
     public String listarProductos(Model model) {
         try {
@@ -42,11 +34,7 @@ public class ProductClientController {
         }
         return "productos";
     }
-
-    /**
-     * Ejercicio 4.3: Buscar un Producto Autenticado (2 puntos)
-     * Busca un producto específico por ID y muestra los resultados o mensajes de error
-     */
+    
     @GetMapping("/buscar")
     public String buscarProducto(
             @RequestParam(required = false) Integer id,
